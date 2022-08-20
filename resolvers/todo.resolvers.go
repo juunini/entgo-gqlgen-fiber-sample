@@ -7,6 +7,8 @@ import (
 	"context"
 	"entgogqlgenfibersample/ent"
 	"entgogqlgenfibersample/ent/todo"
+
+	"github.com/google/uuid"
 )
 
 // CreateTodo is the resolver for the createTodo field.
@@ -15,12 +17,12 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input ent.CreateTodoI
 }
 
 // UpdateTodo is the resolver for the updateTodo field.
-func (r *mutationResolver) UpdateTodo(ctx context.Context, id int, input ent.UpdateTodoInput) (*ent.Todo, error) {
+func (r *mutationResolver) UpdateTodo(ctx context.Context, id uuid.UUID, input ent.UpdateTodoInput) (*ent.Todo, error) {
 	return ent.FromContext(ctx).Todo.UpdateOneID(id).SetInput(input).Save(ctx)
 }
 
 // UpdateTodos is the resolver for the updateTodos field.
-func (r *mutationResolver) UpdateTodos(ctx context.Context, ids []int, input ent.UpdateTodoInput) ([]*ent.Todo, error) {
+func (r *mutationResolver) UpdateTodos(ctx context.Context, ids []uuid.UUID, input ent.UpdateTodoInput) ([]*ent.Todo, error) {
 	client := ent.FromContext(ctx)
 	if err := client.Todo.Update().Where(todo.IDIn(ids...)).SetInput(input).Exec(ctx); err != nil {
 		return nil, err

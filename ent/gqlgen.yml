@@ -21,7 +21,7 @@ models:
   # Defines the ID field as Go 'int'.
   ID:
     model:
-      - github.com/99designs/gqlgen/graphql.IntID
+      - entgogqlgenfibersample/ent/models.UUID
   Node:
     model:
       - entgogqlgenfibersample/ent.Noder

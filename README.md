@@ -1,6 +1,14 @@
 # entgo, gqlgen, fiber sample
 
-## How to?
+## How to start this server?
+
+```sh
+$ go mod tidy
+$ go generate ./...
+$ go run main.go
+```
+
+## How to make it?
 
 1. Insert under commands
 
@@ -171,3 +179,24 @@ func interruptEmbeddedPostgres(client *ent.Client, postgres *embeddedpostgres.Em
 	os.Exit(0)
 }
 ```
+
+## If you want uuid to id
+
+> CAUTION: If you using uuid, you can't query `node` relay
+
+1. `ent/gqlgen.yml` add `models.ID` in `- <projectName>/ent/models.UUID`
+
+2. Add `ent/models/uuid.go`
+
+3. Change field in `id` property
+	```go
+	field.UUID("id", uuid.UUID{}).
+			Default(uuid.New).
+			SchemaType(
+				map[string]string{
+					dialect.Postgres: "uuid",
+				},
+			)
+	```
+
+4. `go generate ./...`

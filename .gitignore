@@ -5,4 +5,5 @@
 !/ent/gqlgen.yml
 
 !/ent/schema
+!/ent/models
 /ent/schema/ent.graphql

@@ -5,8 +5,10 @@ import (
 
 	"entgo.io/contrib/entgql"
 	"entgo.io/ent"
+	"entgo.io/ent/dialect"
 	"entgo.io/ent/schema"
 	"entgo.io/ent/schema/field"
+	"github.com/google/uuid"
 )
 
 type Todo struct {
@@ -15,6 +17,13 @@ type Todo struct {
 
 func (Todo) Fields() []ent.Field {
 	return []ent.Field{
+		field.UUID("id", uuid.UUID{}).
+			Default(uuid.New).
+			SchemaType(
+				map[string]string{
+					dialect.Postgres: "uuid",
+				},
+			),
 		field.String("name"),
 		field.Time("created_at").
 			Default(time.Now).
