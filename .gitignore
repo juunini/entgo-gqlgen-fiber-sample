@@ -1,0 +1,8 @@
+/ent/*
+
+!/ent/generate.go
+!/ent/entc.go
+!/ent/gqlgen.yml
+
+!/ent/schema
+/ent/schema/ent.graphql

@@ -1,0 +1,11 @@
+scalar Time
+
+type Mutation {
+  createTodo(input: CreateTodoInput!): Todo!
+  updateTodo(id: ID!, input: UpdateTodoInput!): Todo!
+  updateTodos(ids: [ID!]!, input: UpdateTodoInput!): [Todo!]!
+}
+
+extend type Query {
+  ping: String!
+}
